@@ -15,11 +15,12 @@
   <script src="assets/js/app.js" defer></script>
 </head>
 <body>
+<a class="skip-to-content" href="#app">Aller au contenu</a>
 
 <!-- TOPBAR -->
-<div id="topbar">
+<header id="topbar">
 <div class="topbar-inner">
-  <div class="logo" onclick="nav('home')">
+  <div class="logo" onclick="nav('home')" role="button" tabindex="0" aria-label="Accueil — Digital Ads Hub">
     <div class="logo-name">
       <span class="logo-wordmark">DigitalAds</span><span class="logo-hub">Hub</span>
     </div>
@@ -30,7 +31,7 @@
     <a href="https://www.oconnection.fr/" target="_blank" rel="noopener" style="display:none"><img src="assets/img/img-1.png" alt="Øconnection"></a>
 
   </div>
-  <nav id="mainNav">
+  <nav id="mainNav" aria-label="Navigation principale">
     <button class="nav-home" onclick="nav('home');closeMobile()">Accueil</button>
     <div class="nav-divider"></div>
     <button class="nav-global nav-social" id="gb-social" onclick="nav('social');closeMobile()">Social Ads</button>
@@ -43,23 +44,23 @@
     <input id="search-input" type="text" placeholder="Rechercher…" oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')toggleSearch()" autocomplete="off">
   </div>
   <button class="nav-search-btn" id="search-btn" onclick="toggleSearch()" title="Rechercher" aria-label="Recherche"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-  <div id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+  <button id="hamburger" type="button" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="mainNav" onclick="toggleMobile()"><span></span><span></span><span></span></button>
 </div>
 </div>
 <!-- SEARCH DROPDOWN -->
 <div class="search-dropdown" id="search-dropdown">
   <div class="search-results" id="search-results"></div>
-</div>
+</header>
 
 <!-- APP -->
-<div id="app">
+<main id="app">
 
 <!-- ═══ HOME ═══ -->
 <div class="page active" id="page-home">
 
   <div class="home-twin-grid">
     <!-- Social Ads card -->
-    <div class="home-big-card home-big-card-social" onclick="nav('social')">
+    <div class="home-big-card home-big-card-social" onclick="nav('social')" role="button" tabindex="0" aria-label="Social Ads — Formats, restrictions et KPIs par plateforme">
       <div class="hbc-tag hbc-tag-social">● 11 plateformes</div>
       <div class="hbc-title">Social Ads</div>
       <div class="hbc-desc">Formats &amp; specs, restrictions de diffusion, KPIs de référence et configuration du tracking — pour chaque réseau social.</div>
@@ -72,7 +73,7 @@
       <span class="hbc-arrow">→</span>
     </div>
     <!-- Programmatique card -->
-    <div class="home-big-card home-big-card-prog" onclick="nav('prog')">
+    <div class="home-big-card home-big-card-prog" onclick="nav('prog')" role="button" tabindex="0" aria-label="Programmatique — Formats et leviers digitaux">
       <div class="hbc-tag hbc-tag-prog">● 7 leviers</div>
       <div class="hbc-title">Programmatique</div>
       <div class="hbc-desc">Vidéo Online, BVOD, AVOD, SVOD, Display, Audio et DOOH — définitions, placements, ciblages et acteurs clés du marché français.</div>
@@ -88,109 +89,109 @@
 
   <div class="sec-title" style="margin-top:4px;font-size:.95rem">Ressources transversales</div>
   <div class="transv-grid">
-    <div class="transv-card" onclick="nav('benchmarks')"><span class="transv-icon">📈</span><div><div class="transv-title">Benchmarks</div><div class="transv-desc">Coûts par KPI par réseau social et secteur.</div></div></div>
-    <div class="transv-card" onclick="nav('metrics')"><span class="transv-icon">📏</span><div><div class="transv-title">Définitions</div><div class="transv-desc">Impressions, portée, vues, CTR, CPA…</div></div></div>
-    <div class="transv-card" onclick="nav('traps')"><span class="transv-icon">⚠️</span><div><div class="transv-title">À Éviter</div><div class="transv-desc">Les 10 erreurs les plus coûteuses.</div></div></div>
-    <div class="transv-card" onclick="nav('legal')"><span class="transv-icon">⚖️</span><div><div class="transv-title">Légal</div><div class="transv-desc">Loi Sapin, Évin, RGPD, influenceurs…</div></div></div>
-    <div class="transv-card" onclick="nav('overview')"><span class="transv-icon">📋</span><div><div class="transv-title">Øverview</div><div class="transv-desc">Veille OPS &amp; Digitale bimensuelle.</div></div></div>
+    <div class="transv-card" onclick="nav('benchmarks')" role="button" tabindex="0" aria-label="Benchmarks — Coûts par KPI"><span class="transv-icon">📈</span><div><div class="transv-title">Benchmarks</div><div class="transv-desc">Coûts par KPI par réseau social et secteur.</div></div></div>
+    <div class="transv-card" onclick="nav('metrics')" role="button" tabindex="0" aria-label="Définitions des métriques"><span class="transv-icon">📏</span><div><div class="transv-title">Définitions</div><div class="transv-desc">Impressions, portée, vues, CTR, CPA…</div></div></div>
+    <div class="transv-card" onclick="nav('traps')" role="button" tabindex="0" aria-label="À Éviter — Erreurs fréquentes"><span class="transv-icon">⚠️</span><div><div class="transv-title">À Éviter</div><div class="transv-desc">Les 10 erreurs les plus coûteuses.</div></div></div>
+    <div class="transv-card" onclick="nav('legal')" role="button" tabindex="0" aria-label="Légal — Cadre réglementaire français"><span class="transv-icon">⚖️</span><div><div class="transv-title">Légal</div><div class="transv-desc">Loi Sapin, Évin, RGPD, influenceurs…</div></div></div>
+    <div class="transv-card" onclick="nav('overview')" role="button" tabindex="0" aria-label="Øverview — Veille OPS & Digitale"><span class="transv-icon">📋</span><div><div class="transv-title">Øverview</div><div class="transv-desc">Veille OPS &amp; Digitale bimensuelle.</div></div></div>
   </div>
 </div>
 
 <!-- ═══ SOCIAL ADS ═══ -->
 <div class="page" id="page-social">
   <div class="platform-grid">
-    <div class="p-card" onclick="openPlatform('facebook','formats')" style="background:linear-gradient(145deg,rgba(24,119,242,.07) 0%,#fff 60%)">
+    <div class="p-card" onclick="openPlatform('facebook','formats')" role="button" tabindex="0" aria-label="Facebook — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(24,119,242,.07) 0%,#fff 60%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:var(--fb-bg)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047v-2.66c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.887v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="#1877F2"/></svg></div>
         <div><div class="p-card-name">Facebook</div><div class="p-card-sub">Meta Ads · Feed, Stories, Reels</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('facebook','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('facebook','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('facebook','kpi')">KPIs</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('facebook','pixel')">Pixel</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('facebook','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('facebook','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('facebook','kpi')">KPIs</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('facebook','pixel')">Pixel</button>
       </div>
     </div>
-    <div class="p-card" onclick="openPlatform('instagram','formats')" style="background:linear-gradient(145deg,rgba(193,53,132,.07) 0%,#fff 60%)">
+    <div class="p-card" onclick="openPlatform('instagram','formats')" role="button" tabindex="0" aria-label="Instagram — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(193,53,132,.07) 0%,#fff 60%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:var(--ig-bg)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="#C13584"/></svg></div>
         <div><div class="p-card-name">Instagram</div><div class="p-card-sub">Meta Ads · Feed, Stories, Reels, Explore</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('instagram','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('instagram','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('instagram','kpi')">KPIs</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('instagram','pixel')">Pixel</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('instagram','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('instagram','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('instagram','kpi')">KPIs</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('instagram','pixel')">Pixel</button>
       </div>
     </div>
-    <div class="p-card" onclick="openPlatform('youtube','formats')" style="background:linear-gradient(145deg,rgba(255,0,0,.05) 0%,#fff 60%)">
+    <div class="p-card" onclick="openPlatform('youtube','formats')" role="button" tabindex="0" aria-label="YouTube — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(255,0,0,.05) 0%,#fff 60%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:var(--yt-bg)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" fill="#FF0000"/></svg></div>
         <div><div class="p-card-name">YouTube</div><div class="p-card-sub">Google Ads · Instream, Bumper, Discovery</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('youtube','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('youtube','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('youtube','kpi')">KPIs</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('youtube','pixel')">Pixel</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('youtube','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('youtube','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('youtube','kpi')">KPIs</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('youtube','pixel')">Pixel</button>
       </div>
     </div>
-    <div class="p-card" onclick="openPlatform('tiktok','formats')" style="background:linear-gradient(145deg,rgba(0,242,234,.07) 0%,rgba(255,0,80,.04) 100%)">
+    <div class="p-card" onclick="openPlatform('tiktok','formats')" role="button" tabindex="0" aria-label="TikTok — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(0,242,234,.07) 0%,rgba(255,0,80,.04) 100%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:var(--tt-bg)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" fill="#010101"/></svg></div>
         <div><div class="p-card-name">TikTok</div><div class="p-card-sub">TikTok Ads · In-Feed, TopView, Spark</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('tiktok','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('tiktok','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('tiktok','kpi')">KPIs</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('tiktok','pixel')">Pixel</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('tiktok','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('tiktok','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('tiktok','kpi')">KPIs</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('tiktok','pixel')">Pixel</button>
       </div>
     </div>
-    <div class="p-card" onclick="openPlatform('linkedin','formats')" style="background:linear-gradient(145deg,rgba(10,102,194,.07) 0%,#fff 60%)">
+    <div class="p-card" onclick="openPlatform('linkedin','formats')" role="button" tabindex="0" aria-label="LinkedIn — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(10,102,194,.07) 0%,#fff 60%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:var(--li-bg)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0A66C2"/></svg></div>
         <div><div class="p-card-name">LinkedIn</div><div class="p-card-sub">Campaign Manager · Feed, Message, Document</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('linkedin','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('linkedin','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('linkedin','kpi')">KPIs</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('linkedin','pixel')">Pixel</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('linkedin','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('linkedin','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('linkedin','kpi')">KPIs</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('linkedin','pixel')">Pixel</button>
       </div>
     </div>
-    <div class="p-card" onclick="openPlatform('snapchat','formats')" style="background:linear-gradient(145deg,rgba(255,202,40,.10) 0%,#fff 60%)">
+    <div class="p-card" onclick="openPlatform('snapchat','formats')" role="button" tabindex="0" aria-label="Snapchat — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(255,202,40,.10) 0%,#fff 60%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:#FFCA28;padding:0;overflow:hidden"><img src="assets/img/img-2.png" alt="Snapchat" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"></div>
         <div><div class="p-card-name">Snapchat</div><div class="p-card-sub">Snap Ads · Stories, Lens, Collection</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('snapchat','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('snapchat','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('snapchat','kpi')">KPIs</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('snapchat','pixel')">Pixel</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('snapchat','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('snapchat','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('snapchat','kpi')">KPIs</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('snapchat','pixel')">Pixel</button>
       </div>
     </div>
-    <div class="p-card" onclick="openPlatform('reddit','formats')" style="background:linear-gradient(145deg,rgba(255,69,0,.07) 0%,#fff 60%)">
+    <div class="p-card" onclick="openPlatform('reddit','formats')" role="button" tabindex="0" aria-label="Reddit — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(255,69,0,.07) 0%,#fff 60%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:var(--rd-bg)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z" fill="#FF4500"/></svg></div>
         <div><div class="p-card-name">Reddit</div><div class="p-card-sub">Reddit Ads · Promoted Posts, Video</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('reddit','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('reddit','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('reddit','kpi')">KPIs</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('reddit','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('reddit','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('reddit','kpi')">KPIs</button>
       </div>
     </div>
-    <div class="p-card" onclick="openPlatform('pinterest','formats')" style="background:linear-gradient(145deg,rgba(230,0,35,.06) 0%,#fff 60%)">
+    <div class="p-card" onclick="openPlatform('pinterest','formats')" role="button" tabindex="0" aria-label="Pinterest — Formats, restrictions, KPIs et Pixel" style="background:linear-gradient(145deg,rgba(230,0,35,.06) 0%,#fff 60%)">
       <div class="p-card-head">
         <div class="p-card-icon" style="background:var(--pt-bg)"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" fill="#E60023"/></svg></div>
         <div><div class="p-card-name">Pinterest</div><div class="p-card-sub">Pinterest Ads · Pins, Vidéo, Collections</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('pinterest','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('pinterest','restrictions')">Restrictions</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('pinterest','kpi')">KPIs</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('pinterest','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('pinterest','restrictions')">Restrictions</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('pinterest','kpi')">KPIs</button>
       </div>
     </div>
     <div class="p-card" onclick="openPlatform('x','formats')" style="background:linear-gradient(145deg,rgba(0,0,0,.04) 0%,#fff 60%)">
@@ -199,8 +200,8 @@
         <div><div class="p-card-name">X</div><div class="p-card-sub">X Ads · Image, Vidéo, Carousel</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('x','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('x','restrictions')">Restrictions</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('x','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('x','restrictions')">Restrictions</button>
       </div>
     </div>
     <div class="p-card" onclick="openPlatform('twitch','formats')" style="background:linear-gradient(145deg,rgba(145,71,255,.07) 0%,#fff 60%)">
@@ -209,8 +210,8 @@
         <div><div class="p-card-name">Twitch</div><div class="p-card-sub">Twitch Ads · Video, Display, Sponsoring</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('twitch','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('twitch','restrictions')">Restrictions</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('twitch','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('twitch','restrictions')">Restrictions</button>
       </div>
     </div>
     <div class="p-card" onclick="openPlatform('bereal','formats')" style="background:linear-gradient(145deg,rgba(0,0,0,.04) 0%,#fff 60%)">
@@ -219,8 +220,8 @@
         <div><div class="p-card-name">BeReal.</div><div class="p-card-sub">BeReal Ads · In-Feed, Discovery, OPS, Spotlight</div></div>
       </div>
       <div class="p-card-links">
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('bereal','formats')">Formats</span>
-        <span class="p-link" onclick="event.stopPropagation();openPlatform('bereal','restrictions')">Restrictions</span>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('bereal','formats')">Formats</button>
+        <button class="p-link" type="button" onclick="event.stopPropagation();openPlatform('bereal','restrictions')">Restrictions</button>
       </div>
     </div>
   </div>
@@ -257,7 +258,7 @@
 <!-- ═══ OVERVIEW ═══ -->
 <div class="page" id="page-overview"></div>
 
-</div><!-- /app -->
+</main>
 
 <footer>
   <div>© <span id="yr"></span> Digital Ads Hub — Marché Français</div>

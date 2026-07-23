@@ -682,3 +682,97 @@ html, body { max-width:100%; overflow-x:hidden; }
   outline:2px solid var(--accent);
   outline-offset:-2px;
 }
+
+/* ═══════════════════════════════════════════════
+   PART 4 — ACCESSIBILITY
+   ═══════════════════════════════════════════════ */
+
+/* ── Remove default focus outline, use custom ── */
+*:focus { outline: none; }
+
+/* ── Visible focus indicator for all interactive elements ── */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Focus on dark backgrounds (topbar) ── */
+#topbar *:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ── p-link: reset button styles to match original span look ── */
+button.p-link {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--f-body);
+  transition: background .14s, color .14s, border-color .14s;
+}
+button.p-link:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── trap-head as button ── */
+button.trap-head {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--f-body);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+}
+button.trap-head:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── legal-link as button ── */
+button.legal-link {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--f-body);
+  transition: background .14s, color .14s, border-color .14s;
+}
+button.legal-link:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Skip-to-content link (screen readers + keyboard users) ── */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 9999;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: var(--r-sm);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+.skip-to-content:focus {
+  left: 8px;
+}

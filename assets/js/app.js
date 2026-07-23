@@ -401,11 +401,17 @@ document.addEventListener('click',e=>{if(!e.target.closest('.nav-item'))closeDro
 function toggleMobile(){
   const nav=document.getElementById('mainNav');
   const hb=document.getElementById('hamburger');
-  nav.classList.toggle('open');hb.classList.toggle('open');
+  const open=nav.classList.toggle('open');
+  hb.classList.toggle('open',open);
+  hb.setAttribute('aria-expanded',String(open));
+  hb.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu de navigation');
 }
 function closeMobile(){
   document.getElementById('mainNav').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
+  const hb=document.getElementById('hamburger');
+  hb.classList.remove('open');
+  hb.setAttribute('aria-expanded','false');
+  hb.setAttribute('aria-label','Ouvrir le menu de navigation');
   closeDrops();
 }
 
@@ -872,12 +878,12 @@ function renderTraps(){
   h+=`<div class="trap-list">`;
   traps.forEach((t,i)=>{
     h+=`<div class="trap-card">
-      <div class="trap-head" onclick="toggleTrap(${i})">
+      <button class="trap-head" type="button" aria-expanded="false" aria-controls="tb-${i}" onclick="toggleTrap(${i})">
         <div class="trap-num">${String(i+1).padStart(2,'0')}</div>
         <div class="trap-title">${t.title}</div>
         <span class="trap-chev" id="tc-${i}">▾</span>
-      </div>
-      <div class="trap-body" id="tb-${i}">
+      </button>
+      <div class="trap-body" id="tb-${i}" role="region">
         <div class="trap-row"><strong>Pourquoi on y tombe :</strong> ${t.why}</div>
         <div class="trap-row"><strong>⚡ Impact :</strong> ${t.impact}</div>
         <div class="trap-sol"><strong>✅ Comment l'éviter :</strong> ${t.sol}</div>
@@ -887,7 +893,15 @@ function renderTraps(){
   h+=`</div>`;
   document.getElementById('page-traps').innerHTML=h;
 }
-function toggleTrap(i){const b=document.getElementById('tb-'+i);const c=document.getElementById('tc-'+i);const o=b.classList.contains('open');b.classList.toggle('open',!o);c.style.transform=o?'':'rotate(180deg)';}
+function toggleTrap(i){
+  const b=document.getElementById('tb-'+i);
+  const c=document.getElementById('tc-'+i);
+  const head=b?b.previousElementSibling:null;
+  const o=b.classList.contains('open');
+  b.classList.toggle('open',!o);
+  if(c) c.style.transform=o?'':'rotate(180deg)';
+  if(head) head.setAttribute('aria-expanded',String(!o));
+}
 
 const LEGAL_DATA=[
     {n:'1',title:'Loi Sapin',law:'Loi n°93-122 du 29 janvier 1993 · Renforcée par Sapin II (2016)',pts:['<strong>Transparence obligatoire :</strong> toute facture remise à un annonceur doit distinguer les frais médias réels (dépensés sur les plateformes) et les honoraires d\'agence.','<strong>Interdiction de la marge cachée :</strong> une agence ne peut pas revendre de l\'espace publicitaire avec une marge non déclarée au client.','<strong>Remises de volumes :</strong> les remises obtenues auprès des plateformes (programmes partenaires Meta, TikTok...) peuvent être conservées par l\'agence SAUF si le contrat prévoit leur rétrocession.','<strong>Frais technologiques :</strong> les frais de DSP, d\'ad-serving ou de données doivent être déclarés séparément — impossible de les noyer dans le coût média.','<strong>Droit d\'audit :</strong> depuis Sapin II, tout annonceur peut demander un audit complet des achats médias, incluant les extraits de compte plateformes.'],warn:'Un annonceur peut légalement réclamer les copies des factures d\'achat d\'espace. Certaines agences ont été sanctionnées pour dissimulation de marges arrière.'},
@@ -909,7 +923,7 @@ function renderLegal(){
   const secs=LEGAL_DATA
   let h=`<div class="page-head"><h1>⚖️ Cadre légal français</h1><p>Les lois et règlements qui impactent directement votre publicité sur les réseaux sociaux en France.</p></div>`;
   h+=`<div class="legal-toc"><div class="legal-toc-lbl">Sommaire</div><div class="legal-toc-links">`;
-  secs.forEach(s=>h+=`<span class="legal-link" onclick="document.getElementById('ls-${s.n}').scrollIntoView({behavior:'smooth'})">${s.n}. ${s.title}</span>`);
+  secs.forEach(s=>h+=`<button class="legal-link" type="button" onclick="document.getElementById('ls-${s.n}').scrollIntoView({behavior:'smooth'})">${s.n}. ${s.title}</button>`);
   h+=`</div></div>`;
   secs.forEach(s=>{
     h+=`<div class="legal-sec" id="ls-${s.n}"><div class="legal-sec-head"><div class="legal-num">${s.n}</div><div><div class="legal-title">${s.title}</div><div class="legal-law">${s.law}</div></div></div><ul class="legal-pts">`;
@@ -961,7 +975,7 @@ function renderOverview(){
   let listHtml=`<div class="overview-list">`;
   sorted.forEach((ov)=>{
     const realIdx=overviews.indexOf(ov);
-    listHtml+=`<div class="ov-card" data-ov-idx="${realIdx}" style="cursor:pointer" onclick="viewOverview(${realIdx})">
+    listHtml+=`<div class="ov-card" data-ov-idx="${realIdx}" role="button" tabindex="0" style="cursor:pointer" onclick="viewOverview(${realIdx})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewOverview(${realIdx})}">
       <div style="flex:1">
         <div class="ov-card-name">${ov.name}</div>
         <div class="ov-card-date">📅 ${ov.date}</div>
@@ -1235,3 +1249,12 @@ function toggleSearch(){
 }
 function _sgo(i){if(SEARCH_IDX[i]){SEARCH_IDX[i].action();toggleSearch();}}
 
+
+
+// ── Keyboard delegation: Enter / Space on role="button" elements ──
+document.addEventListener('keydown', function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute('role')==='button'&&e.target.tagName!=='BUTTON'&&e.target.tagName!=='A'){
+    e.preventDefault();
+    e.target.click();
+  }
+});
