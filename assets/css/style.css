@@ -1,8 +1,8 @@
 
 :root{
-  --bg:#f7f6f3;--surface:#fff;--border:#e5e1db;--text:#111;--muted:#706b65;--light:#a09890;
+  --bg:#f7f6f3;--surface:#fff;--border:#e5e1db;--text:#111;--muted:#706b65;--light:#645e59;
   --accent:#e8380d;--accent-light:#fff2ef;--accent-dark:#c0280a;
-  --ok:#1a7f4b;--ok-bg:#edfaf3;--warn:#b86c00;--warn-bg:#fff8eb;--err:#c0392b;--err-bg:#fdf0ef;
+  --ok:#1a7f4b;--ok-bg:#edfaf3;--warn:#8f5400;--warn-bg:#fff8eb;--err:#c0392b;--err-bg:#fdf0ef;
   --fb:#1877F2;--fb-bg:#eef4ff;--ig:#C13584;--ig-bg:#fdf0f8;--yt:#FF0000;--yt-bg:#fff0f0;
   --tt:#010101;--tt-bg:#f2f2f2;--li:#0A66C2;--li-bg:#eef4fb;--sc:#FFCA28;--sc-bg:#fffbeb;
   --rd:#FF4500;--rd-bg:#fff2ee;--pt:#E60023;--pt-bg:#fff0f1;
@@ -776,3 +776,15 @@ button.legal-link:hover {
 .skip-to-content:focus {
   left: 8px;
 }
+
+/* ── WCAG AA: accent text on accent-light background → use accent-dark ── */
+.dd-item.active { color: var(--accent-dark); }
+.reco { color: var(--text); }
+.ov-card.ov-active { color: inherit; }
+.p-link:hover,
+button.p-link:hover { color: var(--accent-dark); }
+button.legal-link:hover { color: var(--accent-dark); }
+.ov-open-tab:hover { color: var(--accent-dark); }
+.legal-link:hover { color: var(--accent-dark); }
+.search-result-item.active,
+.search-result-item:focus { outline-color: var(--accent-dark); }
