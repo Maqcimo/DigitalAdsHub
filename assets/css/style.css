@@ -573,3 +573,104 @@ footer{flex-shrink:0}
   .logo-wordmark{font-size:.95rem}
   .logo-hub{font-size:.95rem}
 }
+
+/* ═══════════════════════════════════════════════
+   PART 2 — MOBILE RESPONSIVE FIXES
+   ═══════════════════════════════════════════════ */
+
+/* ── Tap targets: min 44×44px on touch screens ── */
+@media (max-width:900px) {
+  /* Sub-nav tabs */
+  .sub-tab { min-height:44px; display:inline-flex; align-items:center; }
+  /* Dropdown items */
+  .dd-item { min-height:44px; }
+  /* Overview action buttons */
+  .ov-btn { min-height:44px; display:inline-flex; align-items:center; justify-content:center; }
+  /* Close / open-tab buttons in PDF preview */
+  .ov-preview-close, .ov-open-tab { min-height:44px; display:inline-flex; align-items:center; justify-content:center; }
+  /* Hamburger: full 44×44 hit area */
+  #hamburger { min-width:44px; min-height:44px; justify-content:center; align-items:center; }
+  /* Overview card: full row is tappable, make it tall enough */
+  .ov-card { min-height:60px; }
+  /* Search button */
+  .nav-search-btn { width:44px; height:44px; }
+}
+
+/* ── PDF viewer: reasonable height + new-tab button on mobile ── */
+@media (max-width:900px) {
+  .pdf-viewer { height:65vh; max-height:600px; min-height:300px; }
+  .ov-open-tab { display:inline-flex; }
+}
+
+/* ── Open-in-tab button (hidden on desktop, shown on mobile) ── */
+.ov-open-tab {
+  display:none;
+  flex-shrink:0;
+  padding:5px 12px;
+  border-radius:var(--r-xs);
+  background:var(--bg);
+  border:1px solid var(--border);
+  cursor:pointer;
+  font-family:var(--f-body);
+  font-size:12.5px;
+  text-decoration:none;
+  color:var(--text);
+  transition:background .14s;
+  white-space:nowrap;
+}
+.ov-open-tab:hover { background:var(--accent-light); color:var(--accent); border-color:var(--accent); }
+
+/* ── Horizontal overflow: ensure nothing bleeds past viewport ── */
+html, body { max-width:100%; overflow-x:hidden; }
+#app { overflow-x:hidden; }
+.page { overflow-x:hidden; }
+
+/* ── Platform grid: never go narrower than usable at 375px ── */
+@media (max-width:480px) {
+  .platform-grid { grid-template-columns:1fr; }
+  .transv-grid { grid-template-columns:1fr; }
+  .home-twin-grid { grid-template-columns:1fr; }
+}
+
+/* ── Benchmark table: allow horizontal scroll on all small screens ── */
+@media (max-width:768px) {
+  .bm-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--r); }
+  .bm-table { min-width:560px; }
+  .specs-tbl { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+}
+
+/* ── Overview panel: no sticky on mobile, viewer below list ── */
+@media (max-width:900px) {
+  .ov-layout { grid-template-columns:1fr; gap:14px; }
+  .ov-panel-preview { position:static; border-radius:var(--r); }
+  .ov-preview-header { flex-wrap:wrap; gap:8px; }
+}
+
+/* ── Topbar: tighter on very small screens ── */
+@media (max-width:360px) {
+  .logo-wordmark, .logo-hub { font-size:.85rem; }
+  :root { --nav:80px; }
+}
+
+/* ── Search dropdown: full viewport width on mobile ── */
+@media (max-width:700px) {
+  .search-dropdown { padding:8px 10px 12px; }
+  #search-expand.open { width:calc(100vw - 140px); max-width:300px; }
+}
+
+/* ── Cards: prevent text overflow in narrow columns ── */
+.p-card-name, .hbc-title, .fmt-card-title {
+  overflow-wrap:break-word;
+  word-break:break-word;
+}
+
+/* ── KPI / metric cards: single column below 480px ── */
+@media (max-width:480px) {
+  .kpi-cards { grid-template-columns:1fr; }
+  .metrics-grid { grid-template-columns:1fr; }
+}
+
+/* ── Footer: always stacks on mobile ── */
+@media (max-width:600px) {
+  footer { flex-direction:column; align-items:flex-start; gap:10px; }
+}

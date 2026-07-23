@@ -977,7 +977,10 @@ function renderOverview(){
       <div id="pdfViewerContent" style="display:none;flex-direction:column;flex:1;min-height:0">
         <div class="ov-preview-header">
           <div class="ov-preview-title" id="pdfViewerTitle"></div>
-          <button class="ov-preview-close" onclick="closeOvViewer()">✕ Fermer</button>
+          <div style="display:flex;gap:6px;align-items:center;flex-shrink:0">
+            <a class="ov-open-tab" id="pdfOpenTab" href="#" target="_blank" rel="noopener" title="Ouvrir dans un nouvel onglet">↗ Ouvrir</a>
+            <button class="ov-preview-close" onclick="closeOvViewer()">✕ Fermer</button>
+          </div>
         </div>
         <iframe id="pdfViewer" class="pdf-viewer"></iframe>
       </div>
@@ -1018,6 +1021,9 @@ function viewOverview(i){
   } else {
     iframe.src=src;
   }
+  // Update "open in new tab" link
+  const tabLink = document.getElementById('pdfOpenTab');
+  if(tabLink) tabLink.href = (src && src.startsWith('data:')) ? '#' : (src || '#');
   document.getElementById('pdfEmptyState').style.display='none';
   document.getElementById('pdfViewerContent').style.display='flex';
   document.querySelectorAll('.ov-card').forEach(c=>c.classList.remove('ov-active'));
