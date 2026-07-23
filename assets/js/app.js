@@ -827,8 +827,7 @@ function switchBMSector(sector){
   event.target.classList.add('active');
 }
 
-function renderMetrics(){
-  const metrics=[
+const METRICS_DATA=[
     {icon:'👁️',name:'Impressions',def:'Nombre total de fois où une publicité a été affichée sur un écran, qu\'elle ait été vue ou non. Une même personne peut générer plusieurs impressions.',formula:'Total des affichages de l\'annonce'},
     {icon:'👥',name:'Portée (Reach)',def:'Nombre de personnes UNIQUES exposées à la publicité au moins une fois. Toujours inférieur ou égal aux impressions.',formula:'Portée = Impressions ÷ Fréquence'},
     {icon:'🔄',name:'Fréquence',def:'Nombre moyen de fois où une personne unique a vu la publicité. Une fréquence >7 provoque de la "fatigue publicitaire".',formula:'Fréquence = Impressions ÷ Portée'},
@@ -846,6 +845,8 @@ function renderMetrics(){
     {icon:'💰',name:'CPC',def:'Coût moyen par clic. Calculé en divisant le budget dépensé par le nombre de clics.',formula:'CPC = Budget ÷ Clics'},
     {icon:'💰',name:'CPA',def:'Coût par action (achat, lead, inscription). Métrique clé des campagnes conversion.',formula:'CPA = Budget ÷ Nb de conversions'},
   ];
+function renderMetrics(){
+  const metrics=METRICS_DATA
   let h=`<div class="page-head"><h1>📏 Définitions des métriques</h1><p>Référentiel des indicateurs clés utilisés en social ads — applicable à toutes les plateformes.</p></div>`;
   h+=`<div class="metrics-grid">`;
   metrics.forEach(m=>{h+=`<div class="m-card"><div class="m-icon">${m.icon}</div><div class="m-name">${m.name}</div><div class="m-def">${m.def}</div><div class="m-formula">${m.formula}</div></div>`;});
@@ -853,8 +854,7 @@ function renderMetrics(){
   document.getElementById('page-metrics').innerHTML=h;
 }
 
-function renderTraps(){
-  const traps=[
+const TRAPS_DATA=[
     {title:'Lancer une campagne Meta sans pixel vérifié',why:'Le pixel est installé mais le domaine n\'est pas vérifié dans le Business Manager, ou il ne remonte pas les événements de conversion.',impact:'L\'algorithme Meta n\'a aucune donnée pour optimiser. La campagne dépense mais n\'apprend pas.',sol:'Vérifier : (1) domaine vérifié dans Business Manager, (2) pixel envoie des événements via l\'outil de test, (3) API Conversions configurée en complément.'},
     {title:'Oublier les mentions légales sur les visuels',why:'En production créative, les mentions légales sont oubliées ou ajoutées en tout petit, illisibles.',impact:'Rejet de la publicité par la plateforme + risque légal DGCCRF. Pour l\'alcool ou la finance, les sanctions peuvent être lourdes.',sol:'Créer un template de brief créatif avec une case "mentions légales" obligatoire. Mentions en police lisible min. 12px.'},
     {title:'Confondre "Portée" et "Impressions"',why:'En réunion client, on présente les impressions comme le nombre de personnes touchées.',impact:'Le client pense avoir touché 2M de personnes alors que 500K ont vu la pub 4 fois. Évaluation de campagne faussée.',sol:'Portée = personnes uniques. Impressions = total affichages. Toujours présenter les deux + la fréquence.'},
@@ -866,6 +866,8 @@ function renderTraps(){
     {title:'Confondre objectif "Trafic" et "Conversions" sur Meta',why:'Pour envoyer des gens sur le site, on choisit instinctivement "Trafic".',impact:'L\'objectif Trafic optimise pour les clics, pas les conversions. Beaucoup de visites, peu de ventes ou de leads.',sol:'Si l\'objectif est une conversion, choisir "Ventes" ou "Génération de leads". "Trafic" est uniquement pour du trafic pur sans intent de conversion.'},
     {title:'Ne pas paramétrer les UTMs sur les URLs',why:'Les URLs de destination ne comportent pas de paramètres UTM (utm_source, utm_medium, utm_campaign).',impact:'Impossible de distinguer dans Analytics les conversions par plateforme. Tout apparaît comme "Direct".',sol:'Utiliser le Campaign URL Builder Google. Créer une nomenclature UTM standardisée pour toute l\'équipe.'},
   ];
+function renderTraps(){
+  const traps=TRAPS_DATA
   let h=`<div class="page-head"><h1>⚠️ Pièges & erreurs fréquentes</h1><p>Les 10 erreurs les plus coûteuses en social ads — et comment les éviter.</p></div>`;
   h+=`<div class="trap-list">`;
   traps.forEach((t,i)=>{
@@ -887,8 +889,7 @@ function renderTraps(){
 }
 function toggleTrap(i){const b=document.getElementById('tb-'+i);const c=document.getElementById('tc-'+i);const o=b.classList.contains('open');b.classList.toggle('open',!o);c.style.transform=o?'':'rotate(180deg)';}
 
-function renderLegal(){
-  const secs=[
+const LEGAL_DATA=[
     {n:'1',title:'Loi Sapin',law:'Loi n°93-122 du 29 janvier 1993 · Renforcée par Sapin II (2016)',pts:['<strong>Transparence obligatoire :</strong> toute facture remise à un annonceur doit distinguer les frais médias réels (dépensés sur les plateformes) et les honoraires d\'agence.','<strong>Interdiction de la marge cachée :</strong> une agence ne peut pas revendre de l\'espace publicitaire avec une marge non déclarée au client.','<strong>Remises de volumes :</strong> les remises obtenues auprès des plateformes (programmes partenaires Meta, TikTok...) peuvent être conservées par l\'agence SAUF si le contrat prévoit leur rétrocession.','<strong>Frais technologiques :</strong> les frais de DSP, d\'ad-serving ou de données doivent être déclarés séparément — impossible de les noyer dans le coût média.','<strong>Droit d\'audit :</strong> depuis Sapin II, tout annonceur peut demander un audit complet des achats médias, incluant les extraits de compte plateformes.'],warn:'Un annonceur peut légalement réclamer les copies des factures d\'achat d\'espace. Certaines agences ont été sanctionnées pour dissimulation de marges arrière.'},
     {n:'2',title:'Loi Évin',law:'Loi n°91-32 du 10 janvier 1991',pts:['<strong>Alcool — ciblage :</strong> ciblage +18 ans obligatoire sur toutes les plateformes sociales en France. Appliqué automatiquement par les plateformes.','<strong>Alcool — mention légale :</strong> "L\'abus d\'alcool est dangereux pour la santé. À consommer avec modération." doit être visible et lisible dans chaque visuel publicitaire.','<strong>Alcool — contenu interdit :</strong> impossible de présenter la consommation d\'alcool comme bénéfique, comme signe de réussite sociale ou comme facilitant des performances.','<strong>Tabac :</strong> toute publicité pour le tabac, cigarettes et produits de vapotage est totalement interdite en France. Aucune dérogation.','<strong>Influenceurs :</strong> les posts organique d\'influenceurs promouvant de l\'alcool doivent aussi respecter la loi Évin.'],warn:'TikTok France impose un ciblage +25 ans pour les marques d\'alcool, allant au-delà de la loi Évin.'},
     {n:'3',title:'RGPD',law:'Règlement (UE) 2016/679 — applicable depuis mai 2018',pts:['<strong>Consentement cookies :</strong> si vous utilisez un pixel sur votre site (Meta, TikTok, LinkedIn...), vous devez obtenir un consentement explicite AVANT de déposer le cookie. Opt-out seul = illégal.','<strong>Listes CRM :</strong> les emails importés dans les audiences personnalisées (Meta, LinkedIn, TikTok) doivent avoir été collectés avec consentement explicite à un usage publicitaire.','<strong>Durée de conservation :</strong> la CNIL recommande une durée maximale de 13 mois pour les cookies.','<strong>Ciblage fragilisé :</strong> depuis iOS 14.5 (ATT) et la fin des cookies tiers, les audiences de reciblage sont moins précises. Prévoir une hausse structurelle des CPM.','<strong>DPA :</strong> Meta, Google et TikTok sont vos sous-traitants au sens du RGPD. Vérifiez que vos Data Processing Agreements sont signés.'],warn:'La CNIL a condamné Meta à plusieurs centaines de millions d\'euros pour non-conformité RGPD (2022-2023). En tant qu\'annonceur, vous êtes responsable de la collecte sur votre site.'},
@@ -904,6 +905,8 @@ function renderLegal(){
       '<strong>Anticipation budgétaire :</strong> prévoir dès maintenant une marge de 2 à 5 % sur les budgets Google et Meta pour absorber ces surcoûts. Mettre à jour les simulations de coût par KPI en conséquence.'
     ],warn:'Les taux de la taxe GAFA peuvent évoluer. Tenir à jour vos grilles tarifaires à chaque annonce officielle des plateformes. Source&nbsp;: <a href="https://www.destimed.fr/google-augmente-ses-tarifs-de-2-en-france-pour-payer-la-taxe-gafa/" target="_blank" style="color:var(--accent)">Destimed — Google +2%</a> · <a href="https://communicant.info/meta-ads-repercute-la-taxe-gafa-3-sur-vos-campagnes-des-juillet-2026/" target="_blank" style="color:var(--accent)">Communicant — Meta +3%</a>'},
   ];
+function renderLegal(){
+  const secs=LEGAL_DATA
   let h=`<div class="page-head"><h1>⚖️ Cadre légal français</h1><p>Les lois et règlements qui impactent directement votre publicité sur les réseaux sociaux en France.</p></div>`;
   h+=`<div class="legal-toc"><div class="legal-toc-lbl">Sommaire</div><div class="legal-toc-links">`;
   secs.forEach(s=>h+=`<span class="legal-link" onclick="document.getElementById('ls-${s.n}').scrollIntoView({behavior:'smooth'})">${s.n}. ${s.title}</span>`);
@@ -928,6 +931,7 @@ fetch('assets/data/overviews.json')
   .then(data => {
     PRESET_OVERVIEWS = data;
     overviews = [...PRESET_OVERVIEWS, ...userOverviews];
+    SEARCH_IDX = []; // invalidate so next search rebuilds with overviews
     if(document.getElementById('page-overview') && document.getElementById('page-overview').classList.contains('active')){
       renderOverview();
     }
@@ -1061,26 +1065,87 @@ let SEARCH_IDX=[];
 function _norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^\w\s]/g,' ').replace(/\s+/g,' ').trim();}
 function buildSearchIdx(){
   SEARCH_IDX=[];
-  // Plateformes Social Ads
   const TABS=['formats','restrictions','kpi','pixel'];
   const TAB_LABELS={'formats':'Formats','restrictions':'Restrictions','kpi':'KPIs','pixel':'Pixel/Tag'};
+
+  // ── Social Ads: platforms + individual format names ──
   Object.entries(P).forEach(([id,plat])=>{
     TABS.forEach(tab=>{
       if(plat[tab]===undefined) return;
-      SEARCH_IDX.push({label:plat.name||id,sub:'Social Ads · '+(TAB_LABELS[tab]||tab),keywords:[_norm(plat.name||id),tab,TAB_LABELS[tab]||tab,'social','ads'],action:()=>openPlatform(id,tab)});
+      // Platform-tab entry
+      SEARCH_IDX.push({label:plat.name||id, sub:'Social Ads · '+(TAB_LABELS[tab]||tab),
+        keywords:[_norm(plat.name||id), tab, TAB_LABELS[tab]||tab,'social','ads'],
+        action:()=>openPlatform(id,tab)});
+      // Individual format entries within the tab
+      if(Array.isArray(plat[tab])){
+        plat[tab].forEach(fmt=>{
+          if(!fmt||!fmt.name) return;
+          const kws=[_norm(fmt.name),_norm(fmt.desc||''),_norm(plat.name||id),'social','ads',tab];
+          SEARCH_IDX.push({label:fmt.name, sub:'Social Ads · '+(plat.name||id)+' · '+(TAB_LABELS[tab]||tab),
+            keywords:kws, action:()=>openPlatform(id,tab)});
+        });
+      }
     });
   });
-  // Leviers programmatiques
-  if(typeof PROG_LEVIERS!=='undefined'){
-    PROG_LEVIERS.forEach((lev,i)=>{
-      const kws=[_norm(lev.name||''),_norm(lev.tag||''),_norm(lev.def||''),_norm((lev.placements||[]).join(' ')),_norm((lev.ciblage||[]).join(' ')),_norm(lev.interet||''),'programmatique','prog','levier','display','video'];
-      SEARCH_IDX.push({label:lev.name||('Levier '+(i+1)),sub:'Programmatique · '+(lev.tag||''),keywords:kws,action:()=>nav('prog')});
+
+  // ── Benchmarks: sectors + platforms ──
+  if(typeof BM!=='undefined'){
+    Object.entries(BM).forEach(([key,sector])=>{
+      SEARCH_IDX.push({label:sector.label||key, sub:'Benchmarks · Secteur',
+        keywords:[_norm(sector.label||key),'benchmark','cpm','cpc','benchmarks','kpi'],
+        action:()=>nav('benchmarks')});
+      (sector.platforms||[]).forEach(p=>{
+        SEARCH_IDX.push({label:(p.name||'')+' — '+(sector.label||key), sub:'Benchmarks · CPM/CPC/VTR',
+          keywords:[_norm(p.name||''),_norm(sector.label||key),'benchmark','cpm','cpc'],
+          action:()=>nav('benchmarks')});
+      });
     });
   }
-  // Overviews PDF
-  if(typeof PRESET_OVERVIEWS!=='undefined'){
+
+  // ── Métriques ──
+  if(typeof METRICS_DATA!=='undefined'){
+    METRICS_DATA.forEach(m=>{
+      SEARCH_IDX.push({label:m.name, sub:'Métriques · Définition',
+        keywords:[_norm(m.name),_norm(m.def||''),_norm(m.formula||''),'métrique','kpi','définition','metric'],
+        action:()=>nav('metrics')});
+    });
+  }
+
+  // ── Pièges & erreurs ──
+  if(typeof TRAPS_DATA!=='undefined'){
+    TRAPS_DATA.forEach((t,i)=>{
+      SEARCH_IDX.push({label:t.title, sub:'Pièges & erreurs fréquentes',
+        keywords:[_norm(t.title),_norm(t.why||''),_norm(t.impact||''),_norm(t.sol||''),'piège','erreur','trap'],
+        action:()=>{nav('traps');setTimeout(()=>{const b=document.getElementById('tb-'+i);if(b&&!b.classList.contains('open'))toggleTrap(i);const el=document.querySelector('.trap-card:nth-child('+(i+1)+')');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},300);}});
+    });
+  }
+
+  // ── Cadre légal ──
+  if(typeof LEGAL_DATA!=='undefined'){
+    LEGAL_DATA.forEach(s=>{
+      SEARCH_IDX.push({label:s.title+' — '+s.law, sub:'Cadre légal',
+        keywords:[_norm(s.title),_norm(s.law||''),_norm((s.pts||[]).join(' ')),'légal','loi','rgpd','droit'],
+        action:()=>{nav('legal');setTimeout(()=>{const el=document.getElementById('ls-'+s.n);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},300);}});
+    });
+  }
+
+  // ── Programmatique ──
+  if(typeof PROG_LEVIERS!=='undefined'){
+    PROG_LEVIERS.forEach((lev,i)=>{
+      const kws=[_norm(lev.name||''),_norm(lev.tag||''),_norm(lev.def||''),
+        _norm((lev.placements||[]).join(' ')),_norm((lev.ciblage||[]).join(' ')),
+        _norm(lev.interet||''),'programmatique','prog','levier','display','video'];
+      SEARCH_IDX.push({label:lev.name||('Levier '+(i+1)), sub:'Programmatique · '+(lev.tag||''),
+        keywords:kws, action:()=>nav('prog')});
+    });
+  }
+
+  // ── Øverviews PDF ──
+  if(typeof PRESET_OVERVIEWS!=='undefined'&&PRESET_OVERVIEWS.length>0){
     PRESET_OVERVIEWS.forEach((ov,i)=>{
-      SEARCH_IDX.push({label:ov.name||('Overview '+(i+1)),sub:'Overview · PDF',keywords:[_norm(ov.name||''),'overview','pdf'],action:()=>{nav('overview');setTimeout(()=>viewOverview(i),300);}});
+      SEARCH_IDX.push({label:ov.name||('Overview '+(i+1)), sub:'Øverview · PDF',
+        keywords:[_norm(ov.name||''),'overview','verview','pdf','rapport','veille'],
+        action:()=>{nav('overview');setTimeout(()=>viewOverview(i),300);}});
     });
   }
 }
@@ -1120,19 +1185,53 @@ function doSearch(q){
   if(hits.length===0) hits=SEARCH_IDX.map((entry,i)=>({entry,i,score:_fuzzy(entry,qNorm)?1:0})).filter(x=>x.score>0);
   hits.sort((a,b)=>b.score-a.score);
   const top=hits.slice(0,8);
+  _srActiveIdx=-1;
   res.innerHTML=top.length===0
-    ? '<div class="search-empty">Aucun résultat pour « '+trimmed+' »</div>'
-    : top.map(({entry,i})=>`<div class="search-result-item" onclick="_sgo(${i})" tabindex="0" onkeydown="if(event.key==='Enter')_sgo(${i})"><div><div class="search-result-label">${entry.label}</div><div class="search-result-sub">${entry.sub}</div></div></div>`).join('');
+    ? '<div class="search-empty">Aucun résultat pour « '+trimmed+' »</div>'
+    : top.map(({entry,i},ri)=>`<div class="search-result-item" role="option" aria-selected="false" data-ri="${ri}" onclick="_sgo(${i})" tabindex="0"><div><div class="search-result-label">${entry.label}</div><div class="search-result-sub">${entry.sub}</div></div></div>`).join('');
   dropdown.classList.add('open');
 }
+let _srActiveIdx=-1;
+
+function _srSetActive(idx){
+  const items=document.querySelectorAll('.search-result-item');
+  if(!items.length) return;
+  items.forEach((el,i)=>{
+    const active=i===idx;
+    el.classList.toggle('active',active);
+    el.setAttribute('aria-selected',String(active));
+  });
+  if(items[idx]) items[idx].scrollIntoView({block:'nearest'});
+  _srActiveIdx=idx;
+}
+
+function _srHandleKey(e){
+  const dropdown=document.getElementById('search-dropdown');
+  if(!dropdown||!dropdown.classList.contains('open')) return;
+  const items=document.querySelectorAll('.search-result-item');
+  if(e.key==='ArrowDown'){e.preventDefault();_srSetActive(Math.min(_srActiveIdx+1,items.length-1));}
+  else if(e.key==='ArrowUp'){e.preventDefault();_srSetActive(Math.max(_srActiveIdx-1,0));}
+  else if(e.key==='Enter'&&_srActiveIdx>=0){e.preventDefault();const a=document.querySelector('.search-result-item.active');if(a) a.click();}
+  else if(e.key==='Escape'){toggleSearch();}
+}
+
 function toggleSearch(){
   const expand=document.getElementById('search-expand');
   const inp=document.getElementById('search-input');
   const dropdown=document.getElementById('search-dropdown');
   if(!expand) return;
   const open=expand.classList.toggle('open');
-  if(open){closeMobile();if(SEARCH_IDX.length===0) buildSearchIdx();setTimeout(()=>inp&&inp.focus(),60);}
-  else{if(dropdown) dropdown.classList.remove('open');if(inp){inp.value='';const res=document.getElementById('search-results');if(res) res.innerHTML='';}}
+  if(open){
+    closeMobile();
+    if(SEARCH_IDX.length===0) buildSearchIdx();
+    setTimeout(()=>inp&&inp.focus(),60);
+    document.addEventListener('keydown',_srHandleKey);
+  } else {
+    document.removeEventListener('keydown',_srHandleKey);
+    if(dropdown) dropdown.classList.remove('open');
+    if(inp){inp.value='';const res=document.getElementById('search-results');if(res) res.innerHTML='';}
+    _srActiveIdx=-1;
+  }
 }
 function _sgo(i){if(SEARCH_IDX[i]){SEARCH_IDX[i].action();toggleSearch();}}
 
