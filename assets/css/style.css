@@ -74,6 +74,9 @@ img{max-width:100%;display:block}
 .nav-global.nav-bench{color:#fff!important;background:transparent;border:2px solid #fff!important;font-weight:700}
 .nav-global.nav-bench:hover{background:rgba(255,255,255,.12)!important;color:#fff!important}
 .nav-global.nav-bench.active{background:rgba(255,255,255,.15)!important;color:#fff!important}
+.nav-global.nav-gads{color:#fff!important;background:transparent;border:2px solid #fff!important;font-weight:700}
+.nav-global.nav-gads:hover{background:rgba(255,255,255,.12)!important;color:#fff!important}
+.nav-global.nav-gads.active{background:rgba(255,255,255,.15)!important;color:#fff!important}
 
 /* ─── APP ─── */
 #app{max-width:1400px;margin:0 auto;padding:28px 20px 60px}

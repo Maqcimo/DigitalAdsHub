@@ -296,7 +296,7 @@ function mk(type,c){
 // NAVIGATION — Hash-based routing
 // ═══════════════════════════════════════
 let curPlat=null,curTab='formats';
-const GLOBAL_PAGES=['benchmarks','metrics','traps','legal','overview','prog','social'];
+const GLOBAL_PAGES=['benchmarks','metrics','traps','legal','overview','prog','social','gads'];
 const _rendered=new Set();
 const _platCache=new Set();
 
@@ -574,6 +574,7 @@ function renderGlobal(page){
   if(_rendered.has(page))return;
   if(page==='benchmarks')renderBenchmarks();
   else if(page==='prog')renderProg();
+  else if(page==='gads')renderGads();
   else if(page==='metrics')renderMetrics();
   else if(page==='traps')renderTraps();
   else if(page==='legal')renderLegal();
@@ -749,6 +750,95 @@ function renderProg(){
   h+=`</div>`;
   h+=`<div class="prog-notice">🛠️ Les spécificités techniques des formats sont à demander aux trading desk en amont de la campagne.</div>`;
   document.getElementById('page-prog').innerHTML=h;
+}
+
+// ═══════════════════════════════════════
+// GOOGLE ADS
+// ═══════════════════════════════════════
+const GADS_CAMPAGNES = [
+  {
+    emoji: '🔍',
+    name: 'Campagne SEA',
+    tag: 'Réseau de Recherche',
+    tagColor: '#1a73e8',
+    tagBg: '#e8f0fe',
+    objectif: "Capter une demande active en affichant des annonces textuelles sur les pages de résultats Google (SERP). Le format Search cible les utilisateurs au moment précis où ils expriment une intention via une requête clé. Idéal pour les objectifs de trafic qualifié, de génération de leads et de conversions directes.",
+    formats: ['Annonces textuelles responsives (RSA) — jusqu\'à 15 titres et 4 descriptions assemblés dynamiquement par Google AI', 'Extensions d\'annonces : liens annexes (sitelinks), accroches (callouts), extraits de site, numéro de téléphone, prix, formulaire de lead', 'Diffusion : Google Search (SERP), Google Maps, Google Play, sites partenaires du Réseau de Recherche'],
+    ciblage: ['Mots-clés (requêtes exactes, expression exacte, requête large)', 'Audiences superposées : remarketing (RLSA), segments d\'intention personnalisés, audiences similaires', 'Données démographiques : âge, sexe, statut parental, revenus du foyer', 'Localisation géographique : rayon autour d\'un point, zone, ville, région, pays', 'Appareil : mobile, desktop, tablette (avec ajustements d\'enchères)', 'Programmation horaire : plages et jours de diffusion', 'Ajustements d\'enchères par appareil, heure, audience et localisation']
+  },
+  {
+    emoji: '📱',
+    name: 'Campagne d\'Application',
+    tag: 'App Installs & Actions',
+    tagColor: '#34a853',
+    tagBg: '#e6f4ea',
+    objectif: "Promouvoir une application mobile pour générer des installations (CPI) ou des actions spécifiques dans l'application (CPE — in-app actions). Google assemble automatiquement les créations à partir des assets fournis (textes, images, vidéos) et optimise la diffusion en continu selon les objectifs définis.",
+    formats: ['Annonces textuelles sur Google Search et Google Play Store', 'Bannières et interstitiels display sur le Réseau Display Google (GDN)', 'Annonces vidéo sur YouTube (instream skippable, in-feed)', 'Formats natifs sur Google Discover et Gmail', 'Assets auto-assemblés par le machine learning Google — pas de création manuelle par format'],
+    ciblage: ['Ciblage quasi-entièrement automatisé par Google AI selon les objectifs d\'installation ou d\'action in-app', 'Audiences similaires aux utilisateurs existants (générées automatiquement à partir des données d\'app)', 'Signaux d\'audience personnalisés optionnels : listes CRM, segments d\'intention, événements in-app', 'Localisation géographique et langue cible', 'Type d\'appareil et version d\'OS (Android / iOS)']
+  },
+  {
+    emoji: '⚡',
+    name: 'Performance Max',
+    tag: 'Tous inventaires Google',
+    tagColor: '#f9ab00',
+    tagBg: '#fef7e0',
+    objectif: "Campagne orientée objectifs qui automatise l'ensemble de la chaîne d'optimisation — enchères, audiences et créations — sur tous les inventaires Google depuis un flux unique. Permet d'atteindre des clients à toutes les étapes du funnel en maximisant les conversions ou la valeur de conversion selon l'objectif défini.",
+    formats: ['Annonces Search dynamiques (DSA) sur Google Search', 'Display adaptatif sur le Réseau Display Google', 'Annonces vidéo sur YouTube (instream, YouTube Shorts, in-feed)', 'Annonces Gmail (onglets Promotions et Mises à jour)', 'Annonces Google Discover (fil de contenu personnalisé)', 'Fiches produits Google Maps et liens Google Play', 'Groupes d\'assets : jusqu\'à 15 images, 5 logos, 5 vidéos, 5 titres, 5 descriptions'],
+    ciblage: ['Ciblage 100% automatisé par Google AI — pas de ciblage manuel par mot-clé ou audience', 'Signaux d\'audience fournis comme indications : listes de remarketing, audiences d\'intention personnalisées, données démographiques', 'Expansion d\'URL automatique (exploration de nouvelles pages de destination selon les objectifs)', 'Exclusion de mots-clés négatifs au niveau campagne et compte', 'Exclusion d\'audiences (clients existants, segments à exclure)', 'Contraintes géographiques, linguistiques et de calendrier de diffusion']
+  },
+  {
+    emoji: '🛒',
+    name: 'Campagne Shopping',
+    tag: 'Google Merchant Center',
+    tagColor: '#ea4335',
+    tagBg: '#fce8e6',
+    objectif: "Présenter les produits d'un catalogue e-commerce sous forme de fiches produits visuelles (image, titre, prix, nom du marchand, note) directement dans les résultats de recherche Google. Le déclenchement est piloté par la correspondance entre le flux produit Google Merchant Center et la requête commerciale de l'internaute.",
+    formats: ['Fiches produits Shopping : image produit + titre + prix + nom du marchand + note/avis clients', 'Diffusion : onglet Google Shopping, SERP Google (bloc Shopping en tête de page), Google Images, partenaires Search', 'Annonces Shopping locales (Local Inventory Ads) : inventaire en magasin physique synchronisé en temps réel', 'Formats vidéo produit disponibles via Performance Max Shopping'],
+    ciblage: ['Ciblage piloté par le flux produit (Google Merchant Center) — pas de mots-clés manuels, correspondance automatique avec les requêtes', 'Groupes de produits : segmentation par catégorie, marque, ID produit, étiquette personnalisée, fourchette de prix', 'Mots-clés négatifs (exclusions uniquement)', 'Localisation géographique et zone de livraison', 'Remarketing superposé (RLSA) : ajustement d\'enchères selon l\'historique de visite', 'Ajustements démographiques d\'enchères : âge, sexe']
+  },
+  {
+    emoji: '🎯',
+    name: 'Campagne Demand Gen',
+    tag: 'Display & Vidéo',
+    tagColor: '#9334e6',
+    tagBg: '#f3e8fd',
+    objectif: "Générer de la demande et travailler la considération via des formats visuellement riches diffusés sur YouTube (y compris Shorts), Google Discover et Gmail. Ce type de campagne est conçu pour toucher des audiences engagées, déclencher l'intérêt de nouveaux prospects et alimenter le haut du funnel en amont de la conversion.",
+    formats: ['Annonces vidéo YouTube : instream skippable, in-feed, YouTube Shorts (vertical 9:16)', 'Visuels display adaptatifs sur Google Discover (fil de contenu personnalisé)', 'Annonces Gmail (onglets Promotions et Mises à jour)', 'Carrousels d\'images multi-produits ou multi-visuels', 'Formats rich media assemblés automatiquement par Google AI à partir des assets fournis'],
+    ciblage: ['Audiences similaires (lookalike) construites à partir des listes 1st party de l\'annonceur', 'Segments d\'intention personnalisés (custom intent) : mots-clés de recherche récents et URL de concurrents visités', 'Segments d\'affinité : centres d\'intérêt et habitudes de consommation long terme', 'Segments in-market : audiences en phase d\'achat active sur une catégorie de produit', 'Données démographiques détaillées : âge, sexe, statut parental, tranche de revenus', 'Remarketing : visiteurs du site, listes CRM hashées, abonnés YouTube, viewers de vidéos', 'Localisation géographique et langue cible']
+  }
+];
+
+function renderGads(){
+  let h=`<div class="page-head"><h1>Google Ads</h1><p>Référentiel des types de campagnes Google Ads — objectifs, formats &amp; placements, et options de ciblage.</p></div>`;
+  h+=`<div class="prog-grid">`;
+  GADS_CAMPAGNES.forEach(camp=>{
+    h+=`<div class="prog-card">
+      <div class="prog-card-head">
+        <div class="prog-card-emoji">${camp.emoji}</div>
+        <div>
+          <div class="prog-card-name">${camp.name}</div>
+        </div>
+        <span class="prog-card-tag" style="color:${camp.tagColor};background:${camp.tagBg}">${camp.tag}</span>
+      </div>
+      <div class="prog-card-body">
+        <div class="prog-section">
+          <div class="prog-section-label">Objectif</div>
+          <div class="prog-section-text">${camp.objectif}</div>
+        </div>
+        <div class="prog-section">
+          <div class="prog-section-label">Formats &amp; Placements</div>
+          <div class="prog-tags">${camp.formats.map(f=>`<span class="prog-tag">${f}</span>`).join('')}</div>
+        </div>
+        <div class="prog-section">
+          <div class="prog-section-label">Ciblage</div>
+          <div class="prog-tags">${camp.ciblage.map(c=>`<span class="prog-tag">${c}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+  h+=`</div>`;
+  h+=`<div class="prog-notice">🛠️ Les paramètres de diffusion et d'enchères sont à affiner selon les objectifs, le budget et la maturité du compte Google Ads.</div>`;
+  document.getElementById('page-gads').innerHTML=h;
 }
 
 function renderBenchmarks(){
@@ -1140,6 +1230,17 @@ function buildSearchIdx(){
       SEARCH_IDX.push({label:s.title+' — '+s.law, sub:'Cadre légal',
         keywords:[_norm(s.title),_norm(s.law||''),_norm((s.pts||[]).join(' ')),'légal','loi','rgpd','droit'],
         action:()=>{nav('legal');setTimeout(()=>{const el=document.getElementById('ls-'+s.n);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},300);}});
+    });
+  }
+
+  // ── Google Ads ──
+  if(typeof GADS_CAMPAGNES!=='undefined'){
+    GADS_CAMPAGNES.forEach((camp,i)=>{
+      const kws=[_norm(camp.name||''),_norm(camp.tag||''),_norm(camp.objectif||''),
+        _norm((camp.formats||[]).join(' ')),_norm((camp.ciblage||[]).join(' ')),
+        'google','ads','google ads','sea','search','shopping','pmax','performance max','demand gen','application'];
+      SEARCH_IDX.push({label:camp.name||('Campagne '+(i+1)), sub:'Google Ads · '+(camp.tag||''),
+        keywords:kws, action:()=>nav('gads')});
     });
   }
 
