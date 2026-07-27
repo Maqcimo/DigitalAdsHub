@@ -356,7 +356,7 @@ img{max-width:100%;display:block}
 .nav-global.nav-social.active{background:rgba(255,255,255,.15)!important;color:#fff!important}
 
 /* ─── HOME — 2 BIG CARDS ─── */
-.home-twin-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:36px}
+.home-twin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px}
 .home-big-card{border-radius:var(--r);padding:36px 32px;cursor:pointer;transition:transform .22s,box-shadow .22s;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;min-height:220px;text-decoration:none}
 .home-big-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
 .home-big-card-social{background:var(--text);color:#fff}
@@ -364,19 +364,25 @@ img{max-width:100%;display:block}
 .home-big-card-social::after{content:'';position:absolute;bottom:-40px;left:-20px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(232,56,13,.12) 0%,transparent 70%)}
 .home-big-card-prog{background:#f0f3fb;border:2px solid #d0daf5;color:var(--text)}
 .home-big-card-prog::before{content:'';position:absolute;bottom:-40px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(67,97,238,.15) 0%,transparent 70%)}
+.home-big-card-gads{background:#f0f7ff;border:2px solid #c5deff;color:var(--text)}
+.home-big-card-gads::before{content:'';position:absolute;top:-40px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(26,115,232,.14) 0%,transparent 70%)}
 .hbc-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;position:relative;z-index:1;width:fit-content;margin-bottom:4px}
 .hbc-tag-social{background:rgba(232,56,13,.22);color:#ff7b5e}
 .hbc-tag-prog{background:rgba(67,97,238,.12);color:#4361ee}
+.hbc-tag-gads{background:rgba(26,115,232,.12);color:#1a73e8}
 .hbc-title{font-family:'Aptos',Aptos,sans-serif;font-weight:700;font-size:1.5rem;line-height:1.1;position:relative;z-index:1}
 .home-big-card-social .hbc-title{color:#fff}
 .home-big-card-prog .hbc-title{color:var(--text)}
+.home-big-card-gads .hbc-title{color:var(--text)}
 .hbc-desc{font-size:13.5px;line-height:1.65;position:relative;z-index:1;flex:1}
 .home-big-card-social .hbc-desc{color:rgba(255,255,255,.65)}
 .home-big-card-prog .hbc-desc{color:var(--muted)}
+.home-big-card-gads .hbc-desc{color:var(--muted)}
 .hbc-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;position:relative;z-index:1}
 .hbc-pill{padding:4px 11px;border-radius:20px;font-size:12px;font-weight:500}
 .home-big-card-social .hbc-pill{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
 .home-big-card-prog .hbc-pill{background:#fff;color:var(--muted);border:1px solid var(--border)}
+.home-big-card-gads .hbc-pill{background:#fff;color:var(--muted);border:1px solid var(--border)}
 .hbc-arrow{position:absolute;bottom:28px;right:28px;font-size:22px;opacity:.4;z-index:1}
 
 /* ─── Social Ads page header ─── */
@@ -397,6 +403,7 @@ img{max-width:100%;display:block}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:900px){
+  .home-twin-grid{grid-template-columns:repeat(2,1fr)}
   .hero{padding:18px 22px}
   .hero h1{font-size:1.4rem}
   .formats-grid{grid-template-columns:1fr}
