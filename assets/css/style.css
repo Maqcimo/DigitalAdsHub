@@ -364,12 +364,13 @@ img{max-width:100%;display:block}
 .home-big-card-social::after{content:'';position:absolute;bottom:-40px;left:-20px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(232,56,13,.12) 0%,transparent 70%)}
 .home-big-card-prog{background:#f0f3fb;border:2px solid #d0daf5;color:var(--text)}
 .home-big-card-prog::before{content:'';position:absolute;bottom:-40px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(67,97,238,.15) 0%,transparent 70%)}
-.home-big-card-gads{background:#f0f7ff;border:2px solid #c5deff;color:var(--text)}
-.home-big-card-gads::before{content:'';position:absolute;top:-40px;right:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(26,115,232,.14) 0%,transparent 70%)}
+.home-big-card-gads{background:linear-gradient(135deg,#e6f4ea 0%,#fef8e1 52%,#e8f0fe 100%);border:2px solid rgba(52,168,83,.2);color:var(--text)}
+.home-big-card-gads::before{content:'';position:absolute;top:-50px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(66,133,244,.13) 0%,transparent 70%)}
+.home-big-card-gads::after{content:'';position:absolute;bottom:-40px;left:-20px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(251,188,4,.15) 0%,transparent 70%)}
 .hbc-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;position:relative;z-index:1;width:fit-content;margin-bottom:4px}
 .hbc-tag-social{background:rgba(232,56,13,.22);color:#ff7b5e}
 .hbc-tag-prog{background:rgba(67,97,238,.12);color:#4361ee}
-.hbc-tag-gads{background:rgba(26,115,232,.12);color:#1a73e8}
+.hbc-tag-gads{background:rgba(52,168,83,.14);color:#1e7e3a}
 .hbc-title{font-family:'Aptos',Aptos,sans-serif;font-weight:700;font-size:1.5rem;line-height:1.1;position:relative;z-index:1}
 .home-big-card-social .hbc-title{color:#fff}
 .home-big-card-prog .hbc-title{color:var(--text)}
